@@ -9,6 +9,7 @@ export const fetchPosts = createAsyncThunk(
     },
 );
 
+
 const initialState = {
     posts: {
         data: null,

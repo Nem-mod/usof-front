@@ -1,8 +1,34 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import axios from "../../axios/axios";
+import {useDispatch} from "react-redux";
+import {fetchCreatePost} from "../../store/slices/post";
+import {useNavigate} from "react-router-dom";
 
 export const PostForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [categories, setCategories] = useState([])
+
+  const [title, setTitle] = useState();
   const [content, setContent] = useState();
-  const handleSubmit = async (e) => {};
+  const [selectedCategory, setSelectedCategory ] = useState();
+
+  useEffect(() => {
+    axios.get("/categories/").then(response => {
+      setCategories(response.data);
+    })
+  }, [])
+
+  const handleSubmit = async (e) => {
+    dispatch(fetchCreatePost({
+      title: title,
+      content: content,
+      categories: [
+          {id: selectedCategory}
+      ]
+    }));
+    navigate("/");
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -17,6 +43,8 @@ export const PostForm = () => {
           type="text"
           className={"base_input mt-4"}
           placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+          onChange={e => setTitle(e.target.value)}
+          required
         />
       </div>
       <div className={"mt-4"}>
@@ -51,13 +79,17 @@ export const PostForm = () => {
         </div>
         <div className={"mt-4"}>
           <select
-            id="countries"
+            id="categories"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onChange={e => setSelectedCategory(e.target.value)}
+            defaultValue={null}
+            required
           >
-            <option>United States</option>
-            <option>Canada</option>
-            <option>France</option>
-            <option>Germany</option>
+            <option value={null}></option>
+            {categories.count > 0 && categories.rows.map(e => (
+                  <option key={e.id} value={e.id}>{e.title}</option>
+            ))}
+
           </select>
         </div>
       </div>

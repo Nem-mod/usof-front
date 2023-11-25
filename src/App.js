@@ -8,6 +8,7 @@ import {RegisterForm} from "./components/Forms/RegisterForm";
 import {Feed} from "./pages/Feed/Feed";
 import {PostForm} from "./pages/PostCreation/PostForm";
 import {PostPage} from "./pages/PostPage/PostPage";
+import {Account} from "./pages/Account/Account";
 
 export default App;
 
@@ -26,6 +27,7 @@ function App() {
                             <Route path={"/"} element={<Feed/>}/>
                             <Route path={"/createpost"} element={<PostForm/>}/>
                             <Route path={"/post/:id"} element={<PostPage/>}/>
+                            <Route path={"/account"} element={<Account/>}/>
                         </Routes>
                     </div>
                 </main>

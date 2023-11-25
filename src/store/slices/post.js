@@ -20,6 +20,14 @@ export const fetchComments = createAsyncThunk(
     },
 );
 
+export const fetchCreatePost = createAsyncThunk(
+    "post/fetchCreatePost",
+    async (params) => {
+        const { data } = await axios.post("/posts/", params);
+        return data
+    }
+)
+
 const initialState = {
     post: {
         data: null,

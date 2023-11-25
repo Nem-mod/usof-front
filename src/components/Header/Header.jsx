@@ -62,7 +62,7 @@ const Header = () => {
             {isAuth ? (
               <>
                 <li>
-                  <Link to="/login" className="nav_link" aria-current="page">
+                  <Link to="/account" className="nav_link" aria-current="page">
                     Account
                   </Link>
                 </li>
