@@ -1,6 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import baseUserLogo from "../../source/user.png"
 import {useEffect, useState} from "react";
+import {getFilePath} from "../../sourceRootDir";
+import {fetchUpdateAvatar} from "../../store/slices/auth";
+import {AccountForm} from "../../components/Forms/AccountForm";
+import button from "../../components/Buttons/Button";
 
 export const Account = () => {
     const dispatch = useDispatch();
@@ -10,29 +14,52 @@ export const Account = () => {
     const [selectedFile, setSelectedFile] = useState();
 
     useEffect(() => {
-        if(!selectedFile)
+        if (!selectedFile)
             return
 
         const objUrl = URL.createObjectURL(selectedFile);
         setPreview(objUrl)
         return () => URL.revokeObjectURL(objUrl)
     }, [selectedFile])
-    const handleChangeAvatar = async (e) => {
-        if(e.target.files.length === 1)
+    const handlePreviewAvatar = async (e) => {
+        if (e.target.files.length === 1)
             setSelectedFile(e.target.files[0]);
     }
+
+    const handleChangeAvatar = async (e) => {
+        // console.log(selectedFile, preview);
+        dispatch(fetchUpdateAvatar(selectedFile));
+        setPreview(null);
+    }
+
     return (
         <div>
             {user && (
 
                 <div className="flex gap-4">
                     <div className={"w-40 h-40 rounded-full relative"}>
-                        <div className={"w-12 h-12 absolute p-2 bg-gray-800 rounded text-white border-2 border-gray-700 bottom-0"}>
-                            Edit
-                            <input type={"file"} className={"w-12 h-12 opacity-0 absolute top-0 left-0"} onChange={handleChangeAvatar}/>
+                        <div
+                            className={`${!preview ? "bg-gray-800 text-center text-white border-2 border-gray-700" : "base_button"} absolute p-2 bottom-0  rounded`}>
+                            {!preview
+                                ? (
+                                    <>
+                                        Edit
+                                        <input type={"file"} className={"w-full h-full opacity-0 absolute top-0 left-0"}
+                                               onChange={handlePreviewAvatar}/>
+                                    </>
+
+                                )
+                                : (
+                                    <>
+                                        Save
+                                        <button className={"w-full h-full opacity-0 absolute top-0 left-0"} onClick={handleChangeAvatar}></button>
+                                    </>
+                                )
+                            }
                         </div>
                         <div className={"flex justify-center items-center"}>
-                            <img src={preview || baseUserLogo} alt="logo" className={"w-40 h-40 rounded-full"}/>
+                            <img src={preview || `${getFilePath}/${user.profile_picture_url}` || baseUserLogo}
+                                 alt="logo" className={"w-40 h-40 rounded-full"}/>
                         </div>
                     </div>
                     <div>
@@ -42,6 +69,9 @@ export const Account = () => {
                 </div>
             )}
 
+            <div className={"mt-8"}>
+                 <AccountForm/>
+            </div>
         </div>
     )
 }

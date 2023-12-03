@@ -6,7 +6,7 @@ export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
   return data;
 });
 
-export const fetchAuthMe = createAsyncThunk("auth/fetchAuth", async () => {
+export const fetchAuthMe = createAsyncThunk("auth/me", async () => {
   const { data } = await axios.get("/auth/me");
   return data;
 });
@@ -26,6 +26,26 @@ export const fetchVerify = createAsyncThunk(
   },
 );
 
+
+export const fetchUpdateAvatar = createAsyncThunk(
+    "user/fetchUpdateAvatar",
+    async (params) => {
+      const formData = new FormData();
+      formData.append("file", params);
+      const { data } = await axios.patch("/users/avatar", formData);
+      return data;
+    }
+)
+
+
+export const fetchUpdateUser = createAsyncThunk(
+    "user/fetchUpdateUser",
+    async (params) => {
+      const { data } = await axios.patch("/users/me", params)
+      return data
+    }
+)
+
 const initialState = {
   data: null,
   status: "loading",
@@ -39,56 +59,52 @@ const authSlice = createSlice({
       state.data = null;
     },
   },
-  extraReducers: {
-    [fetchAuth.pending]: (state) => {
-      state.status = "loading";
-      state.data = null;
-    },
-    [fetchAuth.fulfilled]: (state, action) => {
+  // extraReducers: {
+  //   [fetchAuth.fulfilled]: (state, action) => {
+  //     state.status = "loaded";
+  //     state.data = action.payload;
+  //   },
+  //   [fetchAuthMe.fulfilled]: (state, action) => {
+  //     state.status = "loaded";
+  //     state.data = action.payload;
+  //   },
+  //   [fetchRegister.fulfilled]: (state, action) => {
+  //     state.status = "loaded";
+  //     state.data = action.payload;
+  //   },
+  //   [fetchVerify.fulfilled]: (state, action) => {
+  //     state.status = "loaded";
+  //     state.data = action.payload;
+  //   },
+  //
+  // },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAuth.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;
-    },
-    [fetchAuth.rejected]: (state) => {
-      state.status = "error";
-      state.data = null;
-    },
-    [fetchAuthMe.pending]: (state) => {
-      state.status = "loading";
-      state.data = null;
-    },
-    [fetchAuthMe.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;
-    },
-    [fetchAuthMe.rejected]: (state) => {
-      state.status = "error";
-      state.data = null;
-    },
-    [fetchRegister.pending]: (state) => {
-      state.status = "loading";
-      state.data = null;
-    },
-    [fetchRegister.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchRegister.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;
-    },
-    [fetchRegister.rejected]: (state) => {
-      state.status = "error";
-      state.data = null;
-    },
-    [fetchVerify.pending]: (state) => {
-      state.status = "loading";
-      state.data = null;
-    },
-    [fetchVerify.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchVerify.fulfilled, (state, action) => {
       state.status = "loaded";
       state.data = action.payload;
-    },
-    [fetchVerify.rejected]: (state) => {
-      state.status = "error";
-      state.data = null;
-    },
-  },
+    });
+    builder.addCase(fetchUpdateAvatar.fulfilled, (state, action) => {
+      state.status = "loaded";
+      state.data = action.payload;
+    });
+    builder.addCase(fetchUpdateUser.fulfilled, (state, action) => {
+      state.status = "loaded";
+      state.data = action.payload;
+    });
+
+  }
 });
 
 export const authReducer = authSlice.reducer;
