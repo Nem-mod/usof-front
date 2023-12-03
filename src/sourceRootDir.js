@@ -1,0 +1,1 @@
+export const getFilePath = "http://localhost:3001/api/uploads"

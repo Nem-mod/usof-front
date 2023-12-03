@@ -20,7 +20,8 @@ export const Account = () => {
         const objUrl = URL.createObjectURL(selectedFile);
         setPreview(objUrl)
         return () => URL.revokeObjectURL(objUrl)
-    }, [selectedFile])
+    }, [selectedFile]);
+
     const handlePreviewAvatar = async (e) => {
         if (e.target.files.length === 1)
             setSelectedFile(e.target.files[0]);
@@ -58,7 +59,7 @@ export const Account = () => {
                             }
                         </div>
                         <div className={"flex justify-center items-center"}>
-                            <img src={preview || `${getFilePath}/${user.profile_picture_url}` || baseUserLogo}
+                            <img src={preview || (user.profile_picture_url ? `${getFilePath}/${user.profile_picture_url}` : baseUserLogo)}
                                  alt="logo" className={"w-40 h-40 rounded-full"}/>
                         </div>
                     </div>

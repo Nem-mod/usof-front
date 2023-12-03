@@ -59,6 +59,11 @@ const Header = () => {
                 Home
               </Link>
             </li>
+            <li>
+              <Link to="/users" className="nav_link" aria-current="page">
+                Community
+              </Link>
+            </li>
             {isAuth ? (
               <>
                 <li>

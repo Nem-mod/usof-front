@@ -9,6 +9,8 @@ import {Feed} from "./pages/Feed/Feed";
 import {PostForm} from "./pages/PostCreation/PostForm";
 import {PostPage} from "./pages/PostPage/PostPage";
 import {Account} from "./pages/Account/Account";
+import {UserPage} from "./pages/UserPage/UserPage";
+import {UsersPage} from "./pages/UsersPage/UsersPage";
 
 export default App;
 
@@ -28,6 +30,8 @@ function App() {
                             <Route path={"/createpost"} element={<PostForm/>}/>
                             <Route path={"/post/:id"} element={<PostPage/>}/>
                             <Route path={"/account"} element={<Account/>}/>
+                            <Route path={"/user/:id"} element={<UserPage/>}/>
+                            <Route path={"/users"} element={<UsersPage/>}/>
                         </Routes>
                     </div>
                 </main>
