@@ -6,7 +6,7 @@ import {Footer} from "./components/Footer/Footer";
 import {LogInForm} from "./components/Forms/LogInForm";
 import {RegisterForm} from "./components/Forms/RegisterForm";
 import {Feed} from "./pages/Feed/Feed";
-import {PostForm} from "./pages/PostCreation/PostForm";
+import {PostCreatePage} from "./pages/PostCreation/PostCreatePage";
 import {PostPage} from "./pages/PostPage/PostPage";
 import {Account} from "./pages/Account/Account";
 import {UserPage} from "./pages/UserPage/UserPage";
@@ -27,7 +27,7 @@ function App() {
                             <Route path={"/login"} element={<LogInForm/>}/>
                             <Route path={"/signup"} element={<RegisterForm/>}/>
                             <Route path={"/"} element={<Feed/>}/>
-                            <Route path={"/createpost"} element={<PostForm/>}/>
+                            <Route path={"/createpost"} element={<PostCreatePage/>}/>
                             <Route path={"/post/:id"} element={<PostPage/>}/>
                             <Route path={"/account"} element={<Account/>}/>
                             <Route path={"/user/:id"} element={<UserPage/>}/>

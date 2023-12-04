@@ -24,10 +24,18 @@ export const fetchCreatePost = createAsyncThunk(
     "post/fetchCreatePost",
     async (params) => {
         const { data } = await axios.post("/posts/", params);
-        return data
+        return data;
     }
 )
 
+export const fetchUpdatePost = createAsyncThunk(
+    "post/fetchUpdatePost",
+    async (params) => {
+        const { id } = params;
+        const { data } = await axios.patch(`/posts/${id}`, params);
+        return data;
+    }
+)
 const initialState = {
     post: {
         data: null,
@@ -53,6 +61,10 @@ const postSlice = createSlice({
             state.comments = action.payload;
             state.status = "loaded";
         });
+        builder.addCase(fetchUpdatePost.fulfilled, (state, action) => {
+            state.post.data = action.payload;
+            state.status = "loaded";
+        })
     },
 });
 

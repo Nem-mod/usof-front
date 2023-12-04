@@ -23,6 +23,7 @@ export const Post = ({postData, answers}) => {
                         </ul>
                     </div>
                 </div>
+
                 <div className={"flex justify-between mb-3"}>
                     <div className={"mb-3 text-gray-400"}>
                         <span className={""}>Answers: {answers} </span>
