@@ -57,27 +57,9 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.data = null;
+      state.status = null;
     },
   },
-  // extraReducers: {
-  //   [fetchAuth.fulfilled]: (state, action) => {
-  //     state.status = "loaded";
-  //     state.data = action.payload;
-  //   },
-  //   [fetchAuthMe.fulfilled]: (state, action) => {
-  //     state.status = "loaded";
-  //     state.data = action.payload;
-  //   },
-  //   [fetchRegister.fulfilled]: (state, action) => {
-  //     state.status = "loaded";
-  //     state.data = action.payload;
-  //   },
-  //   [fetchVerify.fulfilled]: (state, action) => {
-  //     state.status = "loaded";
-  //     state.data = action.payload;
-  //   },
-  //
-  // },
   extraReducers: (builder) => {
     builder.addCase(fetchAuth.fulfilled, (state, action) => {
       state.status = "loaded";

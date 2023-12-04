@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {fetchAuthMe, logout, selectIsAuth} from "../../store/slices/auth";
 
 const Header = () => {
+  const {data: authUser} = useSelector(state => state.auth)
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   useEffect(() => {
@@ -67,7 +68,7 @@ const Header = () => {
             {isAuth ? (
               <>
                 <li>
-                  <Link to="/account" className="nav_link" aria-current="page">
+                  <Link to={`/user/${authUser?.id}`} className="nav_link" aria-current="page">
                     Account
                   </Link>
                 </li>

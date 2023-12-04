@@ -9,14 +9,13 @@ export const UsersPage = () => {
         const fetchUsers = async () => {
             const {data} = await axios.get(`users`)
             setUserList(data.data);
-            console.log(data.data)
         }
 
         fetchUsers().catch(e => console.log(e));
     }, [])
     return (
         <div className={"flex gap-4"}>
-            {userList && userList.map(e => <AuthorBox userData={e}/>)}
+            {userList && userList.map(e => <AuthorBox key={e.id} userData={e}/>)}
         </div>
     )
 }

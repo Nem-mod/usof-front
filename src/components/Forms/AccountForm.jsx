@@ -24,7 +24,6 @@ export const AccountForm = () => {
             }),
         );
         if (!payload) {
-            console.log(error);
             return;
         }
     };

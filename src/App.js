@@ -8,7 +8,6 @@ import {RegisterForm} from "./components/Forms/RegisterForm";
 import {Feed} from "./pages/Feed/Feed";
 import {PostCreatePage} from "./pages/PostCreation/PostCreatePage";
 import {PostPage} from "./pages/PostPage/PostPage";
-import {Account} from "./pages/Account/Account";
 import {UserPage} from "./pages/UserPage/UserPage";
 import {UsersPage} from "./pages/UsersPage/UsersPage";
 
@@ -29,7 +28,6 @@ function App() {
                             <Route path={"/"} element={<Feed/>}/>
                             <Route path={"/createpost"} element={<PostCreatePage/>}/>
                             <Route path={"/post/:id"} element={<PostPage/>}/>
-                            <Route path={"/account"} element={<Account/>}/>
                             <Route path={"/user/:id"} element={<UserPage/>}/>
                             <Route path={"/users"} element={<UsersPage/>}/>
                         </Routes>
