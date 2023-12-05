@@ -36,9 +36,11 @@ export const UserPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={"mt-8"}>
-                        <AccountForm/>
-                    </div>
+                    {checkIsUsersPage && (
+                        <div className={"mt-8"}>
+                            <AccountForm/>
+                        </div>
+                    )}
                 </>
 
             )}

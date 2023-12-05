@@ -45,18 +45,7 @@ export const Post = ({postData, answers}) => {
                 <RatingBox rating={postData.rating} entityId={postData.id} entityType={"post"}/>
 
                 <div className={"text-xl text-gray-400"}>
-                    {postData?.content} Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit. Illo provident quod velit. Aliquam explicabo numquam
-                    sequi unde. A aliquid, aperiam asperiores beatae consequuntur corporis
-                    deleniti fugit iusto laborum magnam nam numquam omnis placeat
-                    quibusdam quos, rem repellat repellendus sed, sit vitae? Animi
-                    deleniti dolor dolorem hic id inventore, libero modi nam nisi numquam,
-                    odit optio, perspiciatis quis quisquam suscipit temporibus voluptatum?
-                    Accusamus accusantium amet animi architecto autem commodi,
-                    consequuntur corporis, cum dicta dolore dolorem esse eum excepturi
-                    iure libero nam natus neque nesciunt nobis nostrum officiis pariatur
-                    porro quis quos recusandae reiciendis repellendus rerum saepe
-                    similique sint sit veritatis voluptatum.
+                    {postData?.content}
                 </div>
             </div>
         </div>

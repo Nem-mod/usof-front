@@ -6,16 +6,17 @@ import {PostPreview} from "../../components/PostPreview/PostPreview";
 import {Pagination} from "../../components/Pagination/Pagination";
 
 export const Feed = () => {
-    const {data, status} = useSelector(state => state.posts);
+    const {data, status, search} = useSelector(state => state.posts);
     const dispatch = useDispatch();
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentPage, setCurrentPage] = useState(1);
 
-    const size = searchParams.get("size") || 5;
+    const size = searchParams.get("size") || 4;
     useEffect(() => {
         dispatch(fetchPosts({
             page: currentPage,
-            size: size
+            size: size,
+            search: search
         }));
     }, [currentPage])
 

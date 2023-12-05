@@ -7,7 +7,7 @@ export const Comment = ({comment}) => {
             <div className={"mt-2"}>
                 <AuthorBox userData={comment.user}/>
             </div>
-            <div className={"mt-5 pl-2 flex text-center"}>
+            <div className={"mt-5 pl-2 flex"}>
                 <RatingBox rating={comment.rating} entityId={comment.id} entityType={"comment"}/>
 
                 <div className={"text-md text-gray-400"}>{comment.content}</div>

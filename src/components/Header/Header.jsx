@@ -1,22 +1,34 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
 import {fetchAuthMe, logout, selectIsAuth} from "../../store/slices/auth";
+import logo from "../../source/logo.svg"
+import {fetchPosts} from "../../store/slices/posts";
 
 const Header = () => {
   const {data: authUser} = useSelector(state => state.auth)
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
+
+  const [searchPost, setSearchPost] = useState();
   useEffect(() => {
     dispatch(fetchAuthMe());
   }, []);
 
+  const handeSearch = async (e) => {
+    e.preventDefault();
+    dispatch(fetchPosts({
+      page: 1,
+      size: 3,
+      search: searchPost
+    }))
+  }
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-800">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src={logo}
             className="h-8"
             alt="Flowbite Logo"
           />
@@ -45,13 +57,14 @@ const Header = () => {
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col items-center ali p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
             <li>
-              <form action="get">
+              <form onSubmit={handeSearch}>
                 <input
                   type="text"
                   id="first_name"
                   className="base_input p-2"
                   placeholder="Question"
-                  required
+                  onChange={e => setSearchPost(e.target.value)}
+
                 />
               </form>
             </li>

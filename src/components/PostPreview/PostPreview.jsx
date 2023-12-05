@@ -31,7 +31,7 @@ export const PostPreview = ({post}) => {
                             })}
                         </div>
                     </div>
-                    <div>
+                    <div className={"flex-shrink-0"}>
                         {post.user && <AuthorBox userData={post.user}/>}
                     </div>
                 </div>
